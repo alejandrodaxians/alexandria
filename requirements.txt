@@ -2,3 +2,4 @@ sqlalchemy==1.4.40
 pydantic==1.9.2
 fastapi==0.80.0
 fastapi_utils==0.2.1
+uvicorn==0.18.3
