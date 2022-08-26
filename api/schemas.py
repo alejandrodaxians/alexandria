@@ -1,7 +1,10 @@
 from ast import Str
+from typing import List, Optional
+
 from pydantic import BaseModel
+
 from models import BookType
-from typing import Optional, List
+
 
 class UpdateableBook(BaseModel):
     title: str

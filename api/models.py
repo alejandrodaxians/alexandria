@@ -9,7 +9,7 @@ class BookType(str, enum.Enum):
     book = "Book"
     ebook = "E-Book"
 
-class Book(Base):
+class BookInfo(Base):
     __tablename__ = "book"
 
     id = Column(Integer, primary_key=True, index=True)
