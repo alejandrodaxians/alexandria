@@ -1,25 +1,15 @@
-from ast import Str
-from typing import List, Optional
-
 from pydantic import BaseModel
+from typing import Optional
 
-from back.models import BookType
-
-
-class UpdateableBook(BaseModel):
+class Book(BaseModel):
+    id: Optional[int]
     title: str
     author: str
     genre: str
-    release_year = int
-    book_type: BookType
+    release_year: int
 
-class Book(UpdateableBook):
-    id: int
-
-    class Config:
-        orm_mode = True
-
-class PaginatedBookInfo(BaseModel):
-    limit: int
-    offset: int
-    data: List[Book]
+class BookUpdate(BaseModel):
+    title: Optional[str]
+    author: Optional[str]
+    genre: Optional[str]
+    release_year: Optional[int]
