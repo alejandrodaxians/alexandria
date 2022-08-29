@@ -1,15 +1,7 @@
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine, MetaData
 
-DATABASE_URL = "mysql+mysqldb://root:Pa55word@host/alexandria"
+engine = create_engine("mysql+pymysql://root:mysql12345@localhost:3306/alexandria")
 
-db_engine = create_engine(DATABASE_URL)
+meta = MetaData()
 
-SessionLocal = sessionmaker(
-    autocommit=False, 
-    autoflush=False,
-    bind=db_engine
-)
-
-Base = declarative_base()
+conn = engine.connect()
