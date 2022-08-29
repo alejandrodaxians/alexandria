@@ -16,15 +16,15 @@ class Books:
     session: Session = Depends(Base)
 
     @router.get("/books", response_model=PaginatedBookInfo)
-    def list_books(self, limit: int = 10, offset: int = 0):
-        books_list = crud_functions.get_all_books(self.session, limit, offset)
-        response = {"limit": limit, "offset": offset, "data": books_list}
-        return response
+    def list_books(session, limit: int = 10, offset: int = 0):
+        books_list = crud_functions.get_all_books(session, limit, offset)
+        # response = {"limit": limit, "offset": offset}
+        return books_list
 
     @router.post("/books")
-    def add_book(self, book_info: UpdateableBook):
+    def add_book(session, book_info: UpdateableBook):
         try:
-            book_info = crud_functions.create_book(self.session, book_info)
+            book_info = crud_functions.create_book(session, book_info)
             return book_info
         except BookInfoException as bie:
             raise HTTPException(**bie.__dict__)
