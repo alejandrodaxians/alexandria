@@ -1,70 +1,80 @@
-from typing import List
+from fastapi import APIRouter
+from back.database import conn
+from back.exceptions import BookNotFoundException, IdNotFoundException
+from back.models import books_table
+from back.schemas import Book, BookUpdate
 
-from sqlalchemy.orm import Session
-
-from back.exceptions import BookInfoAlreadyExistsError, BookInfoNotFoundError
-from back.models import BookInfo
-from back.schemas import UpdateableBook
-
-class CrudOps:
-
-    def __init__(self) -> None:
-        pass
-
-    def get_all_books(session: Session, limit: int, offset: int) -> List[BookInfo]:
-        return session.query(BookInfo).offset(offset).limit(limit).all()
+library = APIRouter()
 
 
-    def get_book_by_id(session: Session, _id: int) -> BookInfo:
-        book_info = session.query(BookInfo).get(_id)
-        
-        if book_info is None:
-            raise BookInfoNotFoundError
-        return book_info
+@library.get("/books",
+    summary="Get all books", 
+    description="Output all books currently in the database, ordered by id."
+    )
+async def get_all_films():
+    return conn.execute(books_table.select()).fetchall()
 
 
-    def create_book(session: Session, book_info: UpdateableBook) -> BookInfo:
-        book_details = session.query(BookInfo).filter(BookInfo.title == book_info.title,
-        BookInfo.author == book_info.author).first()
-        
-        if book_details:
-            raise BookInfoAlreadyExistsError
-
-        new_book_info = BookInfo(**book_info.dict())
-        session.add(new_book_info)
-        session.commit()
-        session.refresh(new_book_info)
-        return new_book_info
-
-
-    def update_book_info(session: Session, _id: int, info_update: UpdateableBook) -> BookInfo:
-        crud_init = CrudOps()
-        book_info = crud_init.get_book_by_id(session, _id)
-
-        if book_info is None:
-            raise BookInfoNotFoundError
-
-        book_info.title = info_update.title
-        book_info.author = info_update.author
-        book_info.genre = info_update.genre
-        book_info.release_year = info_update.release_year
-
-        session.commit()
-        session.refresh(book_info)
-
-        return book_info
+@library.get("/books/get_book_by_title", 
+    summary="Get books by title",
+    description="""Input a keyword and output all books that contain that keyword in their title.
+                If there are no books with that keyword, an error is returned.""",
+    )
+async def get_book_by_title(keyword: str):
+    result = conn.execute(books_table.select().where(books_table.c.title.contains(keyword))).fetchall()
+    if result == []:
+        raise BookNotFoundException(keyword)
+    else:
+        return result
 
 
-    def delete_book(session: Session, _id: int):
-        crud_init = CrudOps()
-        book_info = crud_init.get_book_by_id(session, _id)
-
-        if book_info is None:
-            raise BookInfoNotFoundError
-
-        session.delete(book_info)
-        session.commit()
-
-        return
-
+@library.post("/books/create_book", 
+    summary="Create a book",
+    description="Input the required data and create a new book. The id will be automatically assigned."
+    )
+async def create_book(book: Book):
+    query = books_table.insert().values(
+        title=book.title,
+        author=book.author,
+        genre=book.genre,
+        release_year=book.release_year,
+    )
+    conn.execute(query)
+    return book
     
+
+@library.delete("/books/delete_book/{id}",
+    summary="Delete a book",
+    description="""Input an id and delete the corresponding book. 
+                If the id is not on the database, an exception will be raised.""",
+    )
+async def delete_book(id: int):
+    exists = conn.execute(books_table.select().where(books_table.c.id == id)).first()
+    if exists == None:
+        raise IdNotFoundException(id)
+    else:
+        result = conn.execute(books_table.select().where(books_table.c.id == id)).fetchall()
+        book_title = result[0][1]
+        conn.execute(books_table.delete().where(books_table.c.id == id))
+        return {"message": "Film with title: " + book_title + ", deleted"}
+
+
+@library.put("/books/update_book/{id}",
+    summary="Update a book",
+    description="""Input an id and update the book with that id. 
+                If the id is not on the database, an exception will be raised.""",
+    )
+async def update_film(id: int, book: BookUpdate):
+    exists = conn.execute(books_table.select().where(books_table.c.id == id)).first()
+    if exists == None:
+        raise IdNotFoundException(id)
+    else:
+        query = books_table.update().where(books_table.c.id == id).values(
+            title=book.title if book.title != None else exists.title,
+            author=book.author if book.author != None else exists.author,
+            genre=book.genre if book.genre != None else exists.genre,
+            release_year=book.release_year if book.release_year != None else exists.release_year
+        )
+        conn.execute(query)
+        return conn.execute(books_table.select().where(books_table.c.id == id)).first()
+        
