@@ -11,7 +11,7 @@ library = APIRouter()
     summary="Get all books", 
     description="Output all books currently in the database, ordered by id."
     )
-async def get_all_films():
+async def get_all_books():
     return conn.execute(books_table.select()).fetchall()
 
 
@@ -56,7 +56,7 @@ async def delete_book(id: int):
         result = conn.execute(books_table.select().where(books_table.c.id == id)).fetchall()
         book_title = result[0][1]
         conn.execute(books_table.delete().where(books_table.c.id == id))
-        return {"message": "Film with title: " + book_title + ", deleted"}
+        return {"message": "Book with title: " + book_title + ", deleted"}
 
 
 @library.put("/books/update_book/{id}",
@@ -64,7 +64,7 @@ async def delete_book(id: int):
     description="""Input an id and update the book with that id. 
                 If the id is not on the database, an exception will be raised.""",
     )
-async def update_film(id: int, book: BookUpdate):
+async def update_book(id: int, book: BookUpdate):
     exists = conn.execute(books_table.select().where(books_table.c.id == id)).first()
     if exists == None:
         raise IdNotFoundException(id)
