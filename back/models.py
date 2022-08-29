@@ -3,7 +3,7 @@ from sqlalchemy.types import String, Integer, Enum
 
 import enum
 
-from database import Base
+from back.database import Base
 
 class BookType(str, enum.Enum):
     book = "Book"

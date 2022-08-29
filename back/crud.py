@@ -2,9 +2,9 @@ from typing import List
 
 from sqlalchemy.orm import Session
 
-from exceptions import BookInfoAlreadyExistsError, BookInfoNotFoundError
-from models import BookInfo
-from schemas import UpdateableBook
+from back.exceptions import BookInfoAlreadyExistsError, BookInfoNotFoundError
+from back.models import BookInfo
+from back.schemas import UpdateableBook
 
 class CrudOps:
 

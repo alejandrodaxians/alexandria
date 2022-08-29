@@ -3,7 +3,7 @@ from typing import List, Optional
 
 from pydantic import BaseModel
 
-from models import BookType
+from back.models import BookType
 
 
 class UpdateableBook(BaseModel):

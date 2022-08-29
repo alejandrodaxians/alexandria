@@ -3,10 +3,10 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi_utils.cbv import cbv
 from sqlalchemy.orm import Session
 
-from crud import CrudOps
-from database import Base
-from exceptions import BookInfoException
-from schemas import Book, PaginatedBookInfo, UpdateableBook
+from back.crud import CrudOps
+from back.database import Base
+from back.exceptions import BookInfoException
+from back.schemas import Book, PaginatedBookInfo, UpdateableBook
 
 router = APIRouter()
 crud_functions = CrudOps()
