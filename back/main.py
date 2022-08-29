@@ -1,12 +1,28 @@
-import uvicorn
 from fastapi import FastAPI
-from pydantic import BaseModel
+from back.crud import library
+from back.exceptions import exception_handler_wrapper
+from starlette.responses import RedirectResponse
 
-import back.api
+description = """
+## Virtual-library Alexandria allows you to:
 
-app = FastAPI()
-app.include_router(back.api.router)
+* Get all books
+* Get all books by title coincidence
+* Create books
+* Delete a book by id
+* Update books
 
-@app.get('/')
-def root_api():
-    return {"message": "Welcome to virtual Alexandria"}
+"""
+
+app = FastAPI(
+    title="Virtual-library Alexandria API",
+    description=description,
+)
+
+app.include_router(library)
+
+exception_handler_wrapper(app)
+
+@app.get("/", include_in_schema=False)
+def root():
+    return RedirectResponse(url="/docs")
