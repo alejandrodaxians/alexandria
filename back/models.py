@@ -1,19 +1,13 @@
-from sqlalchemy.schema import Column
-from sqlalchemy.types import String, Integer, Enum
+from sqlalchemy import Table, Column
+from sqlalchemy.sql.sqltypes import Integer, String, Boolean
+from back.database import meta, engine
 
-import enum
+books_table = Table('books', meta, 
+    Column("id", Integer, primary_key=True), 
+    Column("title", String(255)), 
+    Column("author", String(255)), 
+    Column("genre", String(255)),
+    Column("release_year", Integer)
+)
 
-from back.database import Base
-
-class BookType(str, enum.Enum):
-    book = "Book"
-    ebook = "E-Book"
-
-class BookInfo(Base):
-    __tablename__ = "book"
-
-    id = Column(Integer, primary_key=True, index=True)
-    title = Column(String)
-    author = Column(String)
-    genre = Column(String)
-    release_year = Column(Integer)
+meta.create_all(engine)
