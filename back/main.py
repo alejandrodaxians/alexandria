@@ -1,7 +1,9 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from starlette.responses import RedirectResponse
+
 from back.crud import library
 from back.exceptions import exception_handler_wrapper
-from starlette.responses import RedirectResponse
 
 description = """
 ## Virtual-library Alexandria allows you to:
@@ -17,6 +19,14 @@ description = """
 app = FastAPI(
     title="Virtual-library Alexandria API",
     description=description,
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:8080"], #the front-end will run on this port
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(library)

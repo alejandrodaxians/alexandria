@@ -15,7 +15,7 @@ async def get_all_books():
     return conn.execute(books_table.select()).fetchall()
 
 
-@library.get("/books/get_book_by_title", 
+@library.get("/books/get_book_by_title/{keyword}", 
     summary="Get books by title",
     description="""Input a keyword and output all books that contain that keyword in their title.
                 If there are no books with that keyword, an error is returned.""",
@@ -28,7 +28,7 @@ async def get_book_by_title(keyword: str):
         return result
 
 
-@library.post("/books/create_book", 
+@library.post("/books/create_book/", 
     summary="Create a book",
     description="Input the required data and create a new book. The id will be automatically assigned."
     )
