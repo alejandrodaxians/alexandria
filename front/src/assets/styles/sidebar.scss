@@ -1,5 +1,4 @@
 .sidebar {
-    display: none;
     margin-left: 85%;
     margin-right: 0;
     color: #e6e1c5; 
@@ -16,6 +15,7 @@
     font-size: 3rem;
     margin-left: 20%;
     text-shadow: 5px 5px 10px #000;
+    padding-top: 80px;
 }
 
 .sidebar a {
@@ -37,9 +37,12 @@ a:hover {
     font-weight: bold;
 }
 
-button {
+.toggle {
     margin-right: 0;
-    margin-left: 80%;
+    margin-left: 95%;
     margin-top: 20px;
-    position: relative;
+    position: absolute;
+    border-radius: 5px;
+    background-color: #e6e681;
 }
+  
