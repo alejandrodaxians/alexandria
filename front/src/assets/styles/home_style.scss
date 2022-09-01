@@ -1,0 +1,24 @@
+body {
+    background-image: url('https://miro.medium.com/max/1200/1*4-H9L_CZAEqNiZmmfL9dzQ.jpeg');
+    background-color: #000;
+    background-size: 100%;
+}
+
+@font-face {
+    font-family: AlexiaFont;
+    src: url('@/assets/fonts/AlexiaFont.ttf');
+}
+
+.title {
+    font-family: AlexiaFont, 'Arial Narrow Bold', sans-serif;
+    color: #e6e1c5;
+    margin-left: 100px;
+    margin-top: 100px;
+    -webkit-text-stroke: 2px #000;
+    position: absolute;
+    text-shadow: 5px 5px 6px #000;
+}
+
+h1 {
+    font-size: 6rem;
+}

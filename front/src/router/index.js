@@ -22,14 +22,14 @@ const routes = [
     component: GetAllBooks
   },
   {
-    path: '/delete_book',
-    name: 'delete',
-    component: DeleteBook
-  },
-  {
     path: '/new_book',
     name: 'create',
     component: CreateBook
+  },
+  {
+    path: '/delete_book',
+    name: 'delete',
+    component: DeleteBook
   },
   {
     path: '/search_books',
