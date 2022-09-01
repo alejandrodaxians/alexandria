@@ -4,7 +4,7 @@
       <h1>ALEXANDRIA</h1>
       <h1>VIRTUAL LIBRARY</h1>
     </div>
-    <div :style="show ? filterStyle : null" class="sidebar">
+    <div v-if="show" class="sidebar">
       <h3 class="sidebar-item">MENU</h3>
       <br>
       <a href="/collection">Collection</a>
@@ -18,14 +18,19 @@
       <a href="/update_book">Update a book</a>
     </div>
     <div class="button">
-      <button v-on:click="openSidebar()">Sidebar</button>
+      <button @click="show = !show" class="toggle"><menu-icon /></button>
     </div>
   </body>
 </template>
 
 <script>
+import MenuIcon from 'vue-material-design-icons/Menu.vue';
+
 export default {
   name: 'HomeView',
+  components: {
+    MenuIcon,
+  },
   data() {
     return {
       show:false,
@@ -35,9 +40,6 @@ export default {
     }
   },
   methods: {
-    openSidebar() {
-      this.show = !this.show
-    }
   }
 }
 </script>
