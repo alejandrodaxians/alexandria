@@ -33,10 +33,7 @@ export default {
   },
   data() {
     return {
-      show:false,
-        filterStyle: {
-            display: "block",           
-        },
+      show: false,
     }
   },
   methods: {
