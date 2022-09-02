@@ -1,8 +1,7 @@
-from ..crud import library
-from ..exceptions import BookNotFoundException
+from back.api.endpoints.crud import router
 from fastapi.testclient import TestClient
 
-client = TestClient(library)
+client = TestClient(router)
 
 def test_get_all():
     response = client.get("/books")
