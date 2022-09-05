@@ -1,25 +1,31 @@
-from fastapi import Request, FastAPI
-from fastapi.responses import JSONResponse
+from fastapi import status
 
-class BookNotFoundException(Exception):
-    def __init__(self, name: str):
-        self.keyword = name
+class LibraryError(Exception):
+    
+    def __init__(self, message: str):
+        self.message = message
 
-class IdNotFoundException(Exception):
-    def __init__(self, id: int):
-        self.id = id
+    def __str__(self):
+        return repr(self.message)
 
-def exception_handler_wrapper(app: FastAPI):
-    @app.exception_handler(BookNotFoundException)
-    async def book_exception_handler(request: Request, exc: BookNotFoundException):
-        return JSONResponse(
-            status_code=404,
-            content={"message": f"No coincidences found with {exc.keyword}"},
+
+class ServerError(LibraryError):
+    def __init__(self, message: str, status_code: int = status.HTTP_500_INTERNAL_SERVER_ERROR):
+        super().__init__(
+            message=message,
+            status_code=status_code,
         )
 
-    @app.exception_handler(IdNotFoundException)
-    async def id_exception_handler(request: Request, exc: IdNotFoundException):
-        return JSONResponse(
-            status_code=404,
-            content={"message": f"No book with id {exc.id} found"},
+
+class BookError(LibraryError):
+    def __init__(self, message: str):
+        super().__init__(message)
+
+
+class BookNotFoundError(BookError):
+    def __init__(self, message: str, status_code: int = status.HTTP_404_NOT_FOUND):
+        super().__init__(
+            message=message,
+            status_code=status_code,
         )
+    
