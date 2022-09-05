@@ -5,6 +5,7 @@ from back.models.book import Book
 db_conn = DatabaseConnection()
 conn = db_conn.establish_connection()
 
+books = Book()
 
 def get_all_books() -> List[Dict]:
     """
@@ -15,7 +16,7 @@ def get_all_books() -> List[Dict]:
     Returns:
         List of dicts with every book recorded.
     """
-    return conn.execute(Book.__tablename__.select()).fetchall()
+    return conn.execute(books.__table__.select()).fetchall()
 
 
 def get_book_by_id(id: int) -> Dict:
@@ -29,7 +30,7 @@ def get_book_by_id(id: int) -> Dict:
     Returns:
         Dict with the book information.
     """
-    query_result = conn.execute(Book.__tablename__.select().where(Book.__tablename__.c.id == id)).first()
+    query_result = conn.execute(books.__table__.select().where(books.__table__.c.id== id)).first()
     return query_result
 
 
@@ -45,7 +46,7 @@ def get_book_by_title(title: str) -> List[Dict]:
     Returns:
         List of dicts with every book concurrent to the keyword.
     """
-    query_result = conn.execute(Book.__tablename__.select().where(Book.__tablename__.c.title.contains(title))).fetchall()
+    query_result = conn.execute(books.__table__.select().where(books.__table__.c.title.contains(title))).fetchall()
     return query_result
 
 
@@ -61,7 +62,7 @@ def create_book(book: Book) -> Dict:
     Returns:
         Dict with the new book's information.
     """
-    query = Book.__tablename__.insert().values(
+    query = books.__table__.insert().values(
         title=book.title,
         author=book.author,
         genre=book.genre,
@@ -82,9 +83,9 @@ def delete_book(id: int) -> Dict:
     Returns:
         A Dict containing a message telling the user the book has been succesfully deleted.
     """
-    result = conn.execute(Book.__tablename__.select().where(Book.__tablename__.c.id == id)).first()
+    result = conn.execute(books.__table__.select().where(books.__table__.c.id == id)).first()
     book_title = result[0][1]
-    conn.execute(Book.__tablename__.delete().where(Book.__tablename__.c.id == id))
+    conn.execute(books.__table__.delete().where(books.__table__.c.id == id))
     return {"message": "Book with title: " + book_title + ", deleted"}
 
 
@@ -101,8 +102,8 @@ def update_book(id: int, book: Book) -> Dict:
     Returns:
         A Dict containing a message telling the user the book has been succesfully updated.
     """
-    exists = conn.execute(Book.__tablename__.select().where(Book.__tablename__.c.id == id)).first()
-    query = Book.__tablename__.update().where(Book.__tablename__.c.id == id).values(
+    exists = conn.execute(books.__table__.select().where(books.__table__.c.id == id)).first()
+    query = books.__table__.update().where(books.__table__.c.id == id).values(
             title=book.title if book.title != None else exists.title,
             author=book.author if book.author != None else exists.author,
             genre=book.genre if book.genre != None else exists.genre,
