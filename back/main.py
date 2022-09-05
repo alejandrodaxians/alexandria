@@ -2,9 +2,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import RedirectResponse
 
-from back.api.endpoints.crud import router
-from back.api.exceptions import exception_handler_wrapper
+from back.api.endpoints.books_ep import router
+from back.api.excphandlers import server_excp_handler, book_not_found_excp_handler
 from back.config.properties import APP_DESCRIPTION, APP_TITLE, BACKEND_URL
+from back.api.exceptions import ServerError, BookNotFoundError
 
 app = FastAPI(
     title=APP_TITLE,
@@ -21,7 +22,8 @@ app.add_middleware(
 
 app.include_router(router)
 
-exception_handler_wrapper(app)
+app.add_exception_handler(ServerError, server_excp_handler)
+app.add_exception_handler(BookNotFoundError, book_not_found_excp_handler)
 
 @app.get("/", include_in_schema=False)
 def root():
