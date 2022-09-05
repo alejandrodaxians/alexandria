@@ -1,35 +1,34 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
 
+from back.config.properties import SQL_DB_URL
+
 
 class DatabaseConnection:
-    def __init__(self) -> None:
-        pass
-
 
     def assign_engine():
-        engine = create_engine("mysql+pymysql://root:mysql12345@localhost:3306/alexandria")
+        engine = create_engine(SQL_DB_URL)
         return engine
 
 
-    def declare_base():
+    def declare_base(self):
         Base = declarative_base()
         return Base
 
 
-    def create_tables():
+    def create_tables(self):
         engine = DatabaseConnection.assign_engine()
         Base = DatabaseConnection.declare_base()
         Base.metadata.create_all(engine)
 
 
-    def establish_connection():
+    def establish_connection(self):
         engine = DatabaseConnection.assign_engine()
         conn = engine.connect()
         return conn
 
     
-    def end_connection():
+    def end_connection(self):
         conn = DatabaseConnection.establish_connection()
         conn.close()
         
