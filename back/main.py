@@ -1,16 +1,22 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import RedirectResponse
+from sqlalchemy import create_engine
+
 
 from back.api.endpoints.books_ep import router
 from back.api.excphandlers import server_excp_handler, book_not_found_excp_handler
-from back.config.properties import APP_DESCRIPTION, APP_TITLE, BACKEND_URL
+from back.config.properties import APP_DESCRIPTION, APP_TITLE, BACKEND_URL, SQL_DB_URL
 from back.api.exceptions import ServerError, BookNotFoundError
+from back.models.book import Base
 
 app = FastAPI(
     title=APP_TITLE,
     description=APP_DESCRIPTION,
 )
+
+engine = create_engine(SQL_DB_URL)
+Base.metadata.create_all(engine)
 
 app.add_middleware(
     CORSMiddleware,
