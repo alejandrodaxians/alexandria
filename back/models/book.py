@@ -1,7 +1,8 @@
-from sqlalchemy.orm import declarative_base
 from sqlalchemy import Column, Integer, String
+from back.database.db_connection import DatabaseConnection
 
-Base = declarative_base()
+db = DatabaseConnection()
+Base = db.declare_base()
 
 class Book(Base):
     __tablename__ = 'books'
