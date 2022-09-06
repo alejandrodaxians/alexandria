@@ -34,10 +34,9 @@ export default {
   },
   methods: {
     createBook() {
-      
       axios({
         method: 'post',
-        url: 'http://localhost:8000/books/create_book/',
+        url: 'http://localhost:8000/book/',
         data: {
           title: this.title,
           author: this.author,

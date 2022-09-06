@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     getAllBooks() {
-      axios.get('http://localhost:8000/books')
+      axios.get('http://localhost:8000/book')
         .then(res => {
           var resLength = (res.data).length
           for (let i = 0; i < resLength; i++) {

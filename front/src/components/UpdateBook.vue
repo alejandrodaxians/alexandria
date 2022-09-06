@@ -40,7 +40,7 @@ export default {
     updateBook() {
       axios({
         method: 'put',
-        url: 'http://localhost:8000/books/update_book/' + this.id,
+        url: 'http://localhost:8000/book/' + this.id,
         data: {
           title: this.title,
           author: this.author,
