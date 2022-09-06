@@ -4,9 +4,8 @@ import HomeView from '../views/HomeView.vue'
 import GetAllBooks from '../components/GetAllBooks.vue'
 import DeleteBook from '../components/DeleteBook.vue'
 import CreateBook from '../components/CreateBook.vue'
-import GetBookByTitle from '../components/GetBookByTitle.vue'
+import GetBook from '../components/GetBook.vue'
 import UpdateBook from '../components/UpdateBook.vue'
-
 
 Vue.use(VueRouter)
 
@@ -32,9 +31,9 @@ const routes = [
     component: DeleteBook
   },
   {
-    path: '/search_books',
+    path: '/search_book',
     name: 'search',
-    component: GetBookByTitle
+    component: GetBook
   },
   {
     path: '/update_book',

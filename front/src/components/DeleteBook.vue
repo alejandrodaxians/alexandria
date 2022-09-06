@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     deleteBook() {
-      axios.delete('http://localhost:8000/books/delete_book/' + this.id)
+      axios.delete('http://localhost:8000/book/' + this.id)
         .then((res) => {
           this.msg = res.data;
         })
