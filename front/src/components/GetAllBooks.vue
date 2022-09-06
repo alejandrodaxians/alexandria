@@ -1,10 +1,19 @@
 <template>
-  <div>
-    <button @click="getAllBooks()"> 
-      GET ALL BOOKS
+<body>
+  <div class="getButtonDiv">
+    <button @click="getAllBooks()" class="getButton"> 
+      DISPLAY <br> COLLECTION
     </button>
-    <p>{{ msg }}</p>
   </div>
+  <div class="collectionDiv">
+    <table>
+      <th v-for="(col) in columns" :key="col">{{ col }}</th>
+      <tr v-for="row in rows" :key="row">
+        <td></td>
+      </tr>
+    </table>
+  </div>
+</body>
 </template>
 
 <script>
@@ -13,14 +22,25 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      msg: '',
+      rows: [],
+      columns: [
+        "ID",
+        "TITLE",
+        "AUTHOR",
+        "GENRE",
+        "RELEASE YEAR",
+      ],
+       
     };
   },
   methods: {
     getAllBooks() {
       axios.get('http://localhost:8000/books')
-        .then((res) => {
-          this.msg = res.data;
+        .then(res => {
+          var resLength = (res.data).length
+          for (let i = 0; i < resLength; i++) {
+            console.log(i)
+          }          
         })
         .catch((error) => {
           console.error(error);
@@ -30,5 +50,6 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+@import '@/assets/styles/collection_style.scss';
 </style>
