@@ -9,11 +9,11 @@
       <br>
       <a href="/collection">Collection</a>
       <br><br>
+      <a href="/search_book">Search books</a>
+      <br><br>
       <a href="/new_book">Create a book</a>
       <br><br>
       <a href="/delete_book">Delete a book</a>
-      <br><br>
-      <a href="/search_books">Search books</a>
       <br><br>
       <a href="/update_book">Update a book</a>
     </div>
