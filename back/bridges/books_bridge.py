@@ -7,7 +7,7 @@ conn = db_conn.establish_connection()
 
 books = Book()
 
-def get_all_books() -> List[Dict]:
+def get_all_books() -> List[Book]:
     """
     **Display all books currently in the database**
 
@@ -30,11 +30,10 @@ def get_book_by_id(id: int) -> Dict:
     Returns:
         Dict with the book information.
     """
-    query_result = conn.execute(books.__table__.select().where(books.__table__.c.id== id)).first()
-    return query_result
+    return conn.execute(books.__table__.select().where(books.__table__.c.id== id)).first()
+    
 
-
-def get_book_by_title(title: str) -> List[Dict]:
+def get_book_by_title(title: str) -> List[Book]:
     """
     **Display all the books which names contain the keyword passed**
 
@@ -46,9 +45,8 @@ def get_book_by_title(title: str) -> List[Dict]:
     Returns:
         List of dicts with every book concurrent to the keyword.
     """
-    query_result = conn.execute(books.__table__.select().where(books.__table__.c.title.contains(title))).fetchall()
-    return query_result
-
+    return conn.execute(books.__table__.select().where(books.__table__.c.title.contains(title))).fetchall()
+    
 
 def create_book(book: Book) -> Dict:
     """
@@ -83,10 +81,9 @@ def delete_book(id: int) -> Dict:
     Returns:
         A Dict containing a message telling the user the book has been succesfully deleted.
     """
-    result = conn.execute(books.__table__.select().where(books.__table__.c.id == id)).first()
-    book_title = result[0][1]
+    conn.execute(books.__table__.select().where(books.__table__.c.id == id)).first()
     conn.execute(books.__table__.delete().where(books.__table__.c.id == id))
-    return {"message": "Book with title: " + book_title + ", deleted"}
+    return {"message": f'Book with id: {id}, deleted'}
 
 
 def update_book(id: int, book: Book) -> Dict:
@@ -110,4 +107,4 @@ def update_book(id: int, book: Book) -> Dict:
             release_year=book.release_year if book.release_year != None else exists.release_year
         )
     conn.execute(query)
-    return {"message": "Book with id: " + id + ", updated succesfully."}
+    return {"message": f"Book with id: {id}, updated succesfully."}
