@@ -1,35 +1,56 @@
 <template>
-  <div>
-    <form @submit.prevent="createBook">
-      <label>TITLE</label>
-      <input type="text" v-model="title">
-      <br>
-      <label>AUTHOR</label>
-      <input type="text" v-model="author">
-      <br>
-      <label>GENRE</label>
-      <input type="text" v-model="genre">
-      <br>
-      <label>RELEASE YEAR</label>
-      <input type="text" v-model="release_year">
-      <br>
-      <button>SUBMIT</button>
-    </form>
-    <p>{{ msg }}</p>
-  </div>
+  <body>
+    <div class="createTitle">
+      <p>CREATE A BOOK</p>
+    </div>
+    <div class="createForm">
+      <form @submit.prevent="createBook">
+        <label>TITLE</label>
+        <br>
+        <input type="text" v-model="title">
+        <br>
+        <label>AUTHOR</label>
+        <br>
+        <input type="text" v-model="author">
+        <br>
+        <label>GENRE</label>
+        <br>
+        <input type="text" v-model="genre">
+        <br>
+        <label>RELEASE YEAR</label>
+        <br>
+        <input type="text" v-model="release_year">
+        <div class="submitButton">
+          <button>SUBMIT</button>
+        </div>
+        <div class="resetButton">
+          <button type="reset">RESET</button>
+        </div>
+      </form>
+    </div>
+    <div class="createResult" v-if="show">
+      <p class="resultHeader">BOOK CREATED</p><br>
+      <p>"{{ msg.title }}"</p>
+      <p>By: {{ msg.author }}</p>
+      <p>Released on: {{ msg.release_year }}</p>
+    </div>
+  </body>
 </template>
 
 <script>
 import axios from 'axios'
 
 export default {
+  components: {
+  },
   data() {
     return {
       msg: '',
       title: '',
       author: '',
       genre: '',
-      release_year: 0
+      release_year: 0,
+      show: false,
     };
   },
   methods: {
@@ -45,6 +66,7 @@ export default {
         },
       })
         .then((res) => {
+          this.show = true,
           this.msg = res.data;
         })
         .catch((error) => {
@@ -55,5 +77,6 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+@import '@/assets/styles/creation_style.scss';
 </style>
