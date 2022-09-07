@@ -1,0 +1,59 @@
+.deleteTitle {
+    font-family: AlexiaFont, 'Arial Narrow Bold', sans-serif;
+    color: #fff;
+    position: absolute;
+    margin-top: 2%;
+    margin-left: 2%;
+    font-size: 3rem;
+    text-shadow: 5px 5px 6px #000;
+}
+
+.info {
+    color: #fff;
+    position: absolute;
+    margin-top: 7%;
+    margin-left: 2%;
+    font-size: 1rem;
+    text-shadow: 5px 5px 6px #000;
+    background-color: rgba(36, 37, 2, 0.1);
+}
+
+.deleteInput {
+    position: absolute;
+    margin-left: 2%;
+    margin-top: 10%;
+}
+
+.deleteInput input {
+    margin-bottom: 10px;
+    border: 3px solid #fff;
+    color: #fff;
+    font-size: 1.3rem;
+    background-color: rgba(36, 37, 2, 0.7);
+}
+
+.deleteInput button {
+    color: #fff;
+    background-color: rgb(37, 2, 2);
+    font-family: AlexiaFont, 'Arial Narrow Bold', sans-serif;
+    font-size: 1.8rem;
+    border-radius: 3px;
+    border: 3px solid rgb(184, 184, 184);
+    margin-top: 6%;
+    text-shadow: 5px 5px 6px #000;
+}
+
+.deleteResult {
+    position: absolute;
+    color: #fff;
+    margin-left: 2%;
+    margin-top: 20%;
+    text-shadow: 5px 5px 6px #000;
+    font-size: 1.5rem;
+}
+
+.deleteResult .resultId {    
+    background-color: rgba(36, 37, 2, 0.7);
+    padding: 0px;
+    text-align: center;
+}
