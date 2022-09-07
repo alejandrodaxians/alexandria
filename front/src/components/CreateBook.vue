@@ -7,19 +7,19 @@
       <form @submit.prevent="createBook">
         <label>TITLE</label>
         <br>
-        <input type="text" v-model="title">
+        <input type="text" v-model="title" required>
         <br>
         <label>AUTHOR</label>
         <br>
-        <input type="text" v-model="author">
+        <input type="text" v-model="author" required>
         <br>
         <label>GENRE</label>
         <br>
-        <input type="text" v-model="genre">
+        <input type="text" v-model="genre" required>
         <br>
         <label>RELEASE YEAR</label>
         <br>
-        <input type="text" v-model="release_year">
+        <input type="text" v-model="release_year" required>
         <div class="submitButton">
           <button>SUBMIT</button>
         </div>
