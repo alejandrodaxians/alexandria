@@ -5,22 +5,23 @@
     background-color: rgba(36, 37, 2, 0.5);
     padding: 10px;
     height: 100vh;
-    width: 225px;
+    width: 200px;
     position: absolute;
+    border-bottom: 1px solid #e6e681;
 }
 
 .sidebar-item {
     font-family: Georgia, 'Times New Roman', Times, serif;
     -webkit-text-stroke: 1px #000;
     font-size: 3rem;
-    margin-left: 20%;
+    margin-left: 15%;
     text-shadow: 5px 5px 10px #000;
     padding-top: 80px;
 }
 
 .sidebar a {
     font-family: Georgia, 'Times New Roman', Times, serif;
-    margin-left: 15%;
+    margin-left: 10%;
     font-size: 1.3rem;
     text-decoration: none;
     margin-top: 5px;
@@ -33,8 +34,8 @@
 a:hover {
     color: #e6e1c5;
     background-color: rgb(44, 43, 26);
+    border: 1px solid #e6e681;
     border-radius: 5px;
-    font-weight: bold;
 }
 
 .toggle {
@@ -47,7 +48,7 @@ a:hover {
 }
   
 .homeButton {
-    margin-top: 80%;
+    margin-top: 50%;
 }
 
 .homeIcon {
