@@ -1,6 +1,7 @@
 .collectionDiv {
     margin-left: 2%;
     margin-top: 2%;
+    position: absolute;
 }
 
 @font-face {
@@ -21,7 +22,7 @@
 .collectionDiv td {
     padding: 10px;
     color: #e0e0e0;
-    font-size: 1.2rem;
+    font-size: 1rem;
     border: 2px solid #fff;
     background-color: rgba(36, 37, 2, 0.5);
 
