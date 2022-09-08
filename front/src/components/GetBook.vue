@@ -1,22 +1,26 @@
 <template>
   <body>
-
-    <div class="searchID">
+    <div class="idSearch">
+      <p>SEARCH BY ID</p>
       <input type="text" v-model="id">
+      <br>
       <button class="detail" @click="searchById()">
-        SEARCH by ID
+        SEARCH
       </button>
-      <p>{{ id_msg }}</p>
+      <h5>{{ id_msg.title }}</h5>
+      <h5>{{ id_msg.author }}</h5>
+      <h5>{{ id_msg.genre }}</h5>
+      <h5>{{ id_msg.release_year }}</h5>
     </div>
-
-    <div class="searchTitle">
-      <input type="text" v-model="keyword">
-      <button class="detail" @click="searchByTitle()">
-        SEARCH by TITLE
-      </button>
-      <p>{{ title_msg }}</p>
-    </div>
-    
+  <div class="titleSearch">
+    <p>SEARCH BY TITLE KEYWORD</p>
+    <input type="text" v-model="keyword">
+    <br>
+    <button class="detail" @click="searchByTitle()">
+      SEARCH
+    </button>
+      <h5>{{ title_msg }}</h5>
+  </div>
   </body>
 </template>
 
@@ -46,6 +50,7 @@ export default {
       axios.get('http://localhost:8000/book/title/' + this.keyword)
         .then((res) => {
           this.title_msg = res.data;
+          console.log(this.title_msg[1].title)
         })
         .catch((error) => {
           console.error(error);
@@ -56,4 +61,5 @@ export default {
 </script>
 
 <style scoped>
+@import '@/assets/styles/search-style.scss';
 </style>

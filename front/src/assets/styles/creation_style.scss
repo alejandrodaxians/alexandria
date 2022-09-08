@@ -1,0 +1,82 @@
+@font-face {
+    font-family: AlexiaFont;
+    src: url('@/assets/fonts/AlexiaFont.ttf');
+}
+
+.createTitle {
+    font-family: AlexiaFont, 'Arial Narrow Bold', sans-serif;
+    color: #fff;
+    position: absolute;
+    margin-top: 2%;
+    margin-left: 2%;
+    font-size: 3rem;
+    text-shadow: 5px 5px 6px #000;
+}
+
+.createForm {
+    position: absolute;
+    margin-left: 2%;
+    margin-top: 8%;
+}
+
+.createForm label {
+    font-family: AlexiaFont, 'Arial Narrow Bold', sans-serif;
+    font-size: 1.5rem;
+    color: #fff; 
+    background-color: rgba(36, 37, 2, 0.7);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.createForm input {
+    margin-bottom: 20px;
+    margin-left: 2%;
+    border: 3px solid #fff;
+    color: #fff;
+    font-size: 1.3rem;
+    background-color: rgba(36, 37, 2, 0.7);
+}
+
+.submitButton button {
+    color: #fff;
+    background-color: rgb(2, 37, 24);
+    font-family: AlexiaFont, 'Arial Narrow Bold', sans-serif;
+    font-size: 1.8rem;
+    border-radius: 3px;
+    border: 3px solid rgb(184, 184, 184);
+    margin-top: 6%;
+    text-shadow: 5px 5px 6px #000;
+}
+
+.resetButton{
+    float: right;
+    margin-top: -23%;
+}
+
+.resetButton button {
+    color: #fff;
+    background-color: rgb(37, 25, 2);
+    font-family: AlexiaFont, 'Arial Narrow Bold', sans-serif;
+    font-size: 1.8rem;
+    border-radius: 3px;
+    border: 3px solid rgb(184, 184, 184);
+    margin-top: 6%;
+    text-shadow: 5px 5px 6px #000;
+}
+
+.createResult {
+    position: absolute;
+    margin-left: 35%;
+    margin-top: 10%;
+    color: #fff;
+}
+
+.createResult .resultHeader {
+    font-family: AlexiaFont, 'Arial Narrow Bold', sans-serif;
+    font-size: 1.7rem;
+    text-decoration: underline;
+}
+
+.createResult p {
+    font-size: 1.5rem;
+}

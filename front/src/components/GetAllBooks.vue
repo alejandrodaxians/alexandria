@@ -1,16 +1,21 @@
 <template>
 <body>
-  <div class="getButtonDiv">
-    <button @click="getAllBooks()" class="getButton"> 
-      DISPLAY <br> COLLECTION
-    </button>
-  </div>
   <div class="collectionDiv">
     <table>
-      <th v-for="(col) in columns" :key="col">{{ col }}</th>
-      <tr v-for="row in rows" :key="row">
-        <td></td>
-      </tr>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>TITLE</th>
+          <th>AUTHOR</th>
+          <th>GENRE</th>
+          <th>RELEASE YEAR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="row in rows" :key="row">
+          <td v-for="col in columns" :key="col">{{ row[col] }}</td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </body>
@@ -24,29 +29,23 @@ export default {
     return {
       rows: [],
       columns: [
-        "ID",
-        "TITLE",
-        "AUTHOR",
-        "GENRE",
-        "RELEASE YEAR",
-      ],
-       
+        "id",
+        "title",
+        "author",
+        "genre",
+        "release_year",
+      ], 
     };
   },
-  methods: {
-    getAllBooks() {
+  mounted() {
       axios.get('http://localhost:8000/book')
         .then(res => {
-          var resLength = (res.data).length
-          for (let i = 0; i < resLength; i++) {
-            console.log(i)
-          }          
+          this.rows = res.data;       
         })
         .catch((error) => {
           console.error(error);
         })
     },
-  },
 };
 </script>
 

@@ -1,0 +1,45 @@
+@font-face {
+    font-family: AlexiaFont;
+    src: url('@/assets/fonts/AlexiaFont.ttf');
+}
+
+.idSearch {
+    position: absolute;
+    margin-left: 2%;
+}
+
+.titleSearch {
+    position: absolute;
+    margin-left: 30%;
+}
+
+.idSearch p, .titleSearch p {
+    font-family: AlexiaFont, 'Arial Narrow Bold', sans-serif;
+    color: #fff;
+    margin-top: 2%;
+    font-size: 2rem;
+    text-shadow: 5px 5px 6px #000;
+}
+
+.idSearch input, .titleSearch input {
+    margin-bottom: 20px;
+    border: 3px solid #fff;
+    color: #fff;
+    font-size: 1.3rem;
+    background-color: rgba(36, 37, 2, 0.7);
+}
+
+.idSearch button, .titleSearch button {
+    color: #fff;
+    background-color: rgb(2, 37, 24);
+    font-family: AlexiaFont, 'Arial Narrow Bold', sans-serif;
+    font-size: 1.3rem;
+    border-radius: 3px;
+    border: 3px solid rgb(184, 184, 184);
+    text-shadow: 5px 5px 6px #000;
+}
+
+.idSearch h5, .titleSearch h5 {
+    margin-top: 5%;
+    color: #fff;
+}
