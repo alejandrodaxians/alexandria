@@ -1,0 +1,62 @@
+@font-face {
+    font-family: AlexiaFont;
+    src: url('@/assets/fonts/AlexiaFont.ttf');
+}
+
+.updateTitle {
+    font-family: AlexiaFont, 'Arial Narrow Bold', sans-serif;
+    color: #fff;
+    position: absolute;
+    margin-top: 1%;
+    margin-left: 2%;
+    font-size: 3rem;
+    text-shadow: 5px 5px 6px #000;
+}
+
+.updateForm {
+    position: absolute;
+    margin-top: 7%;
+    margin-left: 2%;
+}
+
+.right {
+    margin-left: 120%;
+    margin-top: -125%;
+}
+
+.updateForm label {
+    font-family: AlexiaFont, 'Arial Narrow Bold', sans-serif;
+    font-size: 1.5rem;
+    color: #fff; 
+    background-color: rgba(36, 37, 2, 0.7);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.updateForm input {
+    margin-bottom: 20px;
+    margin-left: 2%;
+    border: 3px solid #fff;
+    color: #fff;
+    font-size: 1.3rem;
+    background-color: rgba(36, 37, 2, 0.7);
+}
+
+.updateForm button {
+    color: #fff;
+    background-color: rgb(2, 37, 24);
+    font-family: AlexiaFont, 'Arial Narrow Bold', sans-serif;
+    font-size: 1.8rem;
+    border-radius: 3px;
+    border: 3px solid rgb(184, 184, 184);
+    margin-top: 10%;
+    text-shadow: 5px 5px 6px #000;
+}
+
+.resultUpdate {
+    position: absolute;
+    color: #fff;
+    margin-left: 50%;
+    margin-top: 10%;
+    font-size: 1.5rem;
+}

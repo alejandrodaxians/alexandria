@@ -1,25 +1,36 @@
 <template>
-  <div>
-    <form @submit.prevent="updateBook">
-      <label>ID</label>
-      <input type="text" v-model="id">
-      <br>
-      <label>TITLE</label>
-      <input type="text" v-model="title">
-      <br>
-      <label>AUTHOR</label>
-      <input type="text" v-model="author">
-      <br>
-      <label>GENRE</label>
-      <input type="text" v-model="genre">
-      <br>
-      <label>RELEASE YEAR</label>
-      <input type="text" v-model="release_year">
-      <br>
-      <button>SUBMIT</button>
-    </form>
-    <p>{{ msg }}</p>
-  </div>
+  <body>
+    <h3 class="updateTitle">UPDATE A BOOK</h3>
+    <div class="updateForm">
+      <form @submit.prevent="updateBook">
+        <div class="left">
+          <label>ID</label>
+          <br>
+          <input type="text" v-model="id">
+          <br>
+          <label>TITLE</label>
+          <br>
+          <input type="text" v-model="title">
+          <br>
+          <label>AUTHOR</label>
+          <br>
+          <input type="text" v-model="author">
+        </div>
+        <div class="right">
+          <label>GENRE</label>
+          <br>
+          <input type="text" v-model="genre">
+          <br>
+          <label>YEAR</label>
+          <br>
+          <input type="text" v-model="release_year">
+          <br><br><br>
+          <button>SUBMIT</button>
+        </div>
+      </form>
+    </div>
+    <p class="resultUpdate">{{ msg.message }}</p>
+  </body>
 </template>
 
 <script>
@@ -60,4 +71,5 @@ export default {
 </script>
 
 <style scoped>
+@import '@/assets/styles/update_style.scss';
 </style>
