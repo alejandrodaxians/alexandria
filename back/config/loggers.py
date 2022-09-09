@@ -48,4 +48,3 @@ def get_logger(logger_name: str) -> logging.Logger:
 
 for logger_type in back.config.logging_properties.logger_types.keys():
     setup_logger(logger_type)
-

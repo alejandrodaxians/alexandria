@@ -1,7 +1,8 @@
 from fastapi import status
 
+
 class LibraryError(Exception):
-    
+
     def __init__(self, message: str):
         self.message = message
 
@@ -28,4 +29,3 @@ class BookNotFoundError(BookError):
             message=message,
             status_code=status_code,
         )
-    
