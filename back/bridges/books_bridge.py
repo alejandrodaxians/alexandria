@@ -1,11 +1,14 @@
 from typing import List, Dict
+
 from back.database.db_connection import DatabaseConnection
 from back.models.book import Book
 
-db_conn = DatabaseConnection()
-conn = db_conn.establish_connection()
+
+db = DatabaseConnection()
+conn = db.conn
 
 books = Book()
+
 
 def get_all_books() -> List[Book]:
     """
@@ -30,8 +33,8 @@ def get_book_by_id(id: int) -> Dict:
     Returns:
         Dict with the book information.
     """
-    return conn.execute(books.__table__.select().where(books.__table__.c.id== id)).first()
-    
+    return conn.execute(books.__table__.select().where(books.__table__.c.id == id)).first()
+
 
 def get_book_by_title(title: str) -> List[Book]:
     """
@@ -46,7 +49,7 @@ def get_book_by_title(title: str) -> List[Book]:
         List of dicts with every book concurrent to the keyword.
     """
     return conn.execute(books.__table__.select().where(books.__table__.c.title.contains(title))).fetchall()
-    
+
 
 def create_book(book: Book) -> Dict:
     """
@@ -101,10 +104,10 @@ def update_book(id: int, book: Book) -> Dict:
     """
     exists = conn.execute(books.__table__.select().where(books.__table__.c.id == id)).first()
     query = books.__table__.update().where(books.__table__.c.id == id).values(
-            title=book.title if book.title != None else exists.title,
-            author=book.author if book.author != None else exists.author,
-            genre=book.genre if book.genre != None else exists.genre,
-            release_year=book.release_year if book.release_year != None else exists.release_year
+            title=book.title if book.title is not None else exists.title,
+            author=book.author if book.author is not None else exists.author,
+            genre=book.genre if book.genre is not None else exists.genre,
+            release_year=book.release_year if book.release_year is not None else exists.release_year
         )
     conn.execute(query)
     return {"message": f"Book with id: {id}, updated succesfully."}
