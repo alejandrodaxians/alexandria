@@ -1,5 +1,5 @@
 from back.api.exceptions import ServerError, BookNotFoundError
-from back.database.schemas import Book
+from back.models.book import Book
 from back.bridges import books_bridge
 from back.config import loggers
 
