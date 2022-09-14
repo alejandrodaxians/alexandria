@@ -5,7 +5,7 @@ from back.database.schemas import Book
 
 
 db = DatabaseConnection()
-conn = db.conn
+conn = db.connect()
 
 books = Book()
 
