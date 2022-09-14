@@ -1,11 +1,11 @@
 from typing import List, Dict
 
 from back.database.db_connection import DatabaseConnection
-from back.models.book import Book
+from back.database.schemas import Book
 
 
 db = DatabaseConnection()
-conn = db.conn
+conn = db.connect()
 
 books = Book()
 
