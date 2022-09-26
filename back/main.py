@@ -7,7 +7,7 @@ from back.api.endpoints.books_ep import router
 from back.api.excphandlers import server_excp_handler, book_not_found_excp_handler
 from back.config.properties import APP_DESCRIPTION, APP_TITLE, BACKEND_URL
 from back.api.exceptions import ServerError, BookNotFoundError
-from back.database.db_connection import DatabaseConnection
+from back.database.connectors.db_connection import DatabaseConnection
 
 
 db = DatabaseConnection()
